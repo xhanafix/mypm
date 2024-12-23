@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Construction Project Manager</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="chat-container">
+        <header class="chat-header">
+            <h1>AI Construction PM</h1>
+            <div class="header-controls">
+                <button id="themeToggle" class="theme-toggle">
+                    <span class="light-icon">☀️</span>
+                    <span class="dark-icon">🌙</span>
+                </button>
+                <button id="resetApiKey" class="reset-key">Reset API Key</button>
+                <button id="clearChat" class="clear-chat">Clear Chat</button>
+            </div>
+        </header>
+
+        <div id="chatContainer" class="chat-messages"></div>
+
+        <form id="chatInput" class="chat-input-form">
+            <input 
+                type="text" 
+                id="userInput" 
+                placeholder="Type your construction management question..."
+                autocomplete="off"
+            >
+            <input
+                type="file"
+                id="imageInput"
+                accept="image/*"
+                class="image-input"
+            >
+            <button type="submit">Send</button>
+        </form>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
