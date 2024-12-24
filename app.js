@@ -183,8 +183,14 @@ const constructionChatbot = {
                     </div>`;
             case 'error':
                 return `<div class="structured-message error">
-                    <h3>Error</h3>
-                    <p>${message.content}</p>
+                    <div class="error-content">
+                        <h3>Error</h3>
+                        <p>${message.content}</p>
+                    </div>
+                    <button class="retry-button" onclick="constructionChatbot.retryLastMessage(this)">
+                        <span class="retry-icon">🔄</span>
+                        Retry
+                    </button>
                 </div>`;
             case 'risk-assessment':
                 return `<div class="structured-message risk-assessment">
@@ -544,6 +550,36 @@ const constructionChatbot = {
         } catch (error) {
             console.error('Error loading conversation history:', error);
             this.state.conversationHistory = [];
+        }
+    },
+
+    // Add method to retry last message
+    async retryLastMessage(button) {
+        // Get the last user message from conversation history
+        const lastUserMessage = this.state.conversationHistory
+            .filter(msg => msg.role === 'user')
+            .pop();
+
+        if (!lastUserMessage) return;
+
+        // Remove the error message
+        const errorDiv = button.closest('.message');
+        errorDiv.remove();
+
+        // Show loading state
+        this.showLoadingMessage();
+
+        // Retry the request
+        try {
+            const response = await this.processUserInput(lastUserMessage.content);
+            this.removeLoadingMessage();
+            this.addMessageToChat('bot', response);
+        } catch (error) {
+            this.removeLoadingMessage();
+            this.addMessageToChat('bot', {
+                type: 'error',
+                content: `Retry failed: ${error.message || 'An unexpected error occurred'}`
+            });
         }
     }
 };

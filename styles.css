@@ -405,3 +405,52 @@ body {
     border-radius: 4px;
     overflow-x: auto;
 }
+
+/* Error message and retry button styles */
+.structured-message.error {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    background-color: var(--error-color);
+    opacity: 0.9;
+}
+
+.error-content {
+    flex: 1;
+}
+
+.retry-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.retry-button:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.retry-icon {
+    font-size: 1.1em;
+    animation: spin 2s linear infinite paused;
+}
+
+.retry-button:hover .retry-icon {
+    animation-play-state: running;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
